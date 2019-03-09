@@ -3,5 +3,13 @@
 - Import Bootstrap and dependencies
 - Create basic HTML webpage without Webpack
 - Install and get default Webpack, Webpack-CLI working
-- Configure JavaScript imports, exports for Webpack
-- 
+- Configure our JavaScript for Webpack
+- Add our own Webpack configuration settings
+- Add Webpack loaders to enable webpack to serve our sass files
+- Edit our Webpack config to enable cache busting
+- Webpack plugins
+- Making two Webpack configurations: Production, Development
+- Quality of life improvements HTML-loader/File-loader/Clean-Webpack
+- Serve multiple files with webpack
+- Extract CSS
+- Minify HTML/CSS/JS
