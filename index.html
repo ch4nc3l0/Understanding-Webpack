@@ -9,41 +9,63 @@
 </head>
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Navbar</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-      
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Dropdown
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Something else here</a>
-              </div>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-            </li>
-          </ul>
-          <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-          </form>
+  <div class="jumbotron bg-primary">
+    <h1 class="display-4 text-center text-white">Understanding Webpack</h1>
+    <p class="lead text-center text-white">
+      A simple writeup of my journey learning Webpack! 🚀
+    </p>
+  </div>
+
+  <div class="container">
+    <h2>
+      Why Use Webpack?
+    </h2>
+  </div>
+
+  <div class="container">
+    <p class="lead">
+      Webpack automates alot of the headaches of web development. It can bundle
+      assets, minify files, compile scss, serve a development live-reload web 
+      server, compress images, add hashes and much more
+    </p>
+  </div>
+
+  <div class="container">
+      <h3>
+        Basic Webpack Installation
+      </h2>
+  </div>
+
+    <div class="container">
+      <p class="lead">
+        Installation is made easy with npm.
+      </p>
+      <div class="container"></div>
+        <kbd>npm install --save-dev webpack webpack-cli</kbd>
+      </div>   
+    </div>
+
+    <div class="form-group container">
+      <h3>Super Simple JS Addition</h3>
+      <form class="form">
+        
+      <div class="container">
+        <div class="row">
+          <input class="col-sm-2 mr-2" type="text" name="number1" id="number1">
+          <input type="text" readonly class="form-control col-sm-1 text-center mr-2" value="+">
+          <input class="col-sm-2 mr-2" type="text" name="number2" id="number2">
+          <input type="text" readonly class="form-control col-sm-1 text-center mr-2" value="=">
+          <input type="submit" readonly class="btn btn-primary col-sm-2 mr-2" id="staticEmail" value="Get Answer">
         </div>
-      </nav>
+        <input class="col mt-3"type="text" name="answer" id="answer" >
+        <p class="alert alert-danger mt-2">
+            error you should know better
+        </p>
+      </div>
+      </form>
+    </div>
+    
+
 
 <script src="./src/script/libs/jQuery.js"></script>
 <script src="./src/script/libs/popper.min.js"></script>
