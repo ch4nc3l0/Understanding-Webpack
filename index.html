@@ -38,17 +38,18 @@
 
     <div class="container">
       <p class="lead">
-        Installation is made easy with npm.
+        Installation is made easy with npm, we can install Webpack in basically 
+        any folder with a terminal command. Don't have the npm command? Get it 
+        by installing <a href="https://nodejs.org/en/">node</a>.
       </p>
       <div class="container"></div>
         <kbd>npm install --save-dev webpack webpack-cli</kbd>
       </div>   
     </div>
 
-    <div class="form-group container">
+    <div class="form-group container" >
       <h3>Super Simple JS Addition</h3>
-      <form class="form">
-        
+      <form class="form" onsubmit="event.preventDefault(), addnumbers()">
       <div class="container">
         <div class="row">
           <input class="col-sm-2 mr-2" type="text" name="number1" id="number1">
@@ -58,15 +59,15 @@
           <input type="submit" readonly class="btn btn-primary col-sm-2 mr-2" id="staticEmail" value="Get Answer">
         </div>
         <input class="col mt-3"type="text" name="answer" id="answer" >
-        <p class="alert alert-danger mt-2">
-            error you should know better
+        <p class="alert alert-danger mt-2" id="additionerror" style="display:none">
+            Error check the inputs.
         </p>
       </div>
       </form>
     </div>
     
 
-
+<script src="./src/script/numbers.js"></script>
 <script src="./src/script/libs/jQuery.js"></script>
 <script src="./src/script/libs/popper.min.js"></script>
 <script src="./src/script/libs/bootstrap.min.js"></script>
