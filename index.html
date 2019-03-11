@@ -30,10 +30,10 @@
     </p>
   </div>
 
-  <div class="container">
+  <div class="container mt-4">
       <h3>
         Basic Webpack Installation
-      </h2>
+      </h3>
   </div>
 
     <div class="container">
@@ -51,7 +51,7 @@
       <p class="mt-2 lead">
         The new file named package.json should look something like this:
       </p>
-
+      <b>package.json</b>
       <textarea class="form-control" rows="5" readonly style="background-color: #0b161d; color: white;">
         {
           "name": "understanding-webpack",
@@ -84,23 +84,17 @@
       </kbd>
 
       <p class="lead mt-2">
-        After npm is done installing webpack we can look into the package.json
+        After npm is done installing webpack we can look in the package.json
         file and now it includes the webpack dependencies we need. Just because
         Webpack is installed doesn't mean it knows what we want it to do, we have
         to set a couple of configurations up before it will start. The first of them
-        is adding the start script in package.json:
+        is adding the start script to "scripts" in package.json:
       </p>
-
-      <textarea class="form-control" rows="5" readonly style="background-color: #0b161d; color: white;">
-        // ***Begining of package.json***
-        "main": "index.js",
+      <b>package.json</b>
+      <textarea class="form-control" rows="4" readonly style="background-color: #0b161d; color: white;">
           "scripts": {
-            // ***New content here***
             "start": "webpack"
-            // ***End new content***
           },
-          "repository": {
-        // ***End of package.json*** 
       </textarea>
 
       <p class="lead mt-2">
@@ -110,6 +104,7 @@
         correctly.
       </p>
 
+      <b>index.js</b>
       <kbd class="form-control" style="background-color: #0b161d; color: white;" > 
           alert('Webpack is functioning');
       </kbd>
@@ -119,6 +114,7 @@
         main.js. Inside of our HTML we can add the script tag to refer to that file.
       </p>
 
+      <b>index.html</b>
       <kbd class="form-control" style="background-color: #0b161d; color: white;" > 
           &lt;script src="./dist/main.js">&lt;/script>
       </kbd>
@@ -127,9 +123,58 @@
           Congratulations! Webpack is now installed & working in a very basic form! Now
           we can configure it to get more features.
         </p>
-
     </div>
 
+    <div class="container mt-4">
+      <h3>
+        Adding a configuration file
+      </h3>
+    </div>
+
+    <div class="container">
+      <p class="lead">
+        Before adding a dev, and production config for webpack, we will 
+        just make a config file that pretty much does the same thing webpack does by default,
+        and then build on top of that. We will make a file called webpack.config.js, you can call it whatever you would like
+        to but remember the name. I will always refer to the filename as webpack.config.js.
+      </p>
+
+      <p class="lead">
+        Inside of webpack.config.js we have to use some foreign-looking syntax. We have to
+        first export a module and then define our configurations. Here I just defined the
+        entry point (the file webpack will use to build our javascript) as the same file 
+        webpack automatically looks for by default.
+      </p>
+
+      <b>Webpack.config.js</b>
+      <textarea class="form-control" rows="4" readonly style="background-color: #0b161d; color: white;">
+        module.exports = {
+          entry: './src/index.js'
+        };
+      </textarea>
+
+      <p class="lead mt-2">
+        If you would like to customized the entry point all we have to do is change the
+        path:
+      </p>
+
+      <b>Webpack.config.js</b>
+      <kbd class="form-control" style="background-color: #0b161d; color: white;" > 
+        entry: './src/script/index.js'
+      </kbd>
+
+      <p class="lead mt-2">
+        Now if we build using npm start.... we get an error because we moved the default
+        file without actually telling webpack to use our config with the correct entry point
+        path. Inside of package.json we have to change the start line a little:
+      </p>
+      
+      <b>package.json</b>
+      <kbd class="form-control" style="background-color: #0b161d; color: white;" > 
+        "start":"webpack --config webpack.config.js"
+      </kbd>
+
+    </div>
     
 
     <div class="form-group container" >

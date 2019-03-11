@@ -1,4 +1,4 @@
-import { checknumbers } from './script/numbers'
+import { checknumbers } from './numbers'
 
 $(document).ready(function () {
 
