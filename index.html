@@ -38,14 +38,94 @@
 
     <div class="container">
       <p class="lead">
-        Installation is made easy with npm, we can install Webpack in basically 
-        any folder with a terminal command. Don't have the npm command? Get it 
-        by installing <a href="https://nodejs.org/en/">node</a>.
+        Before installing Webpack, we need to make our package.json file with
+        npm. <a href="https://nodejs.org/en/">Node</a> does have to be installed
+        in order to use npm. The -y flag can be used to create the file using
+        the defaults. It's like saying yes, just create my file.
       </p>
-      <div class="container"></div>
-        <kbd>npm install --save-dev webpack webpack-cli</kbd>
-      </div>   
+
+      <kbd class="form-control" style="background-color: #0b161d; color: white;" > 
+        npm init -y
+      </kbd>
+
+      <p class="mt-2 lead">
+        The new file named package.json should look something like this:
+      </p>
+
+      <textarea class="form-control" rows="5" readonly style="background-color: #0b161d; color: white;">
+        {
+          "name": "understanding-webpack",
+          "version": "1.0.0",
+          "description": "Understanding Webpack",
+          "main": "index.js",
+          "scripts": {
+          },
+          "repository": {
+            "type": "git",
+            "url": "git+https://github.com/ch4nc3l0/Understanding-Webpack.git"
+          },
+          "keywords": [],
+          "author": "",
+          "license": "ISC",
+          "bugs": {
+            "url": "https://github.com/ch4nc3l0/Understanding-Webpack/issues"
+          },
+          "homepage": "https://github.com/ch4nc3l0/Understanding-Webpack#readme"
+        }        
+      </textarea>
+
+      <p class="lead mt-2">
+        Installation is made easy with npm, we can install Webpack in basically 
+        any project with a terminal command:
+      </p>
+       
+      <kbd class="form-control" style="background-color: #0b161d; color: white;" > 
+        npm install --save-dev webpack webpack-cli
+      </kbd>
+
+      <p class="lead mt-2">
+        After npm is done installing webpack we can look into the package.json
+        file and now it includes the webpack dependencies we need. Just because
+        Webpack is installed doesn't mean it knows what we want it to do, we have
+        to set a couple of configurations up before it will start. The first of them
+        is adding the start script in package.json:
+      </p>
+
+      <textarea class="form-control" rows="5" readonly style="background-color: #0b161d; color: white;">
+        // ***Begining of package.json***
+        "main": "index.js",
+          "scripts": {
+            // ***New content here***
+            "start": "webpack"
+            // ***End new content***
+          },
+          "repository": {
+        // ***End of package.json*** 
+      </textarea>
+
+      <p class="lead mt-2">
+        The next thing we need to do to make the default config work is 
+        add a directory named src and call the file index.js. For now, we can just add 
+        an alert inside the file to check if webpack really did build
+        correctly.
+      </p>
+
+      <kbd class="form-control" style="background-color: #0b161d; color: white;" > 
+          alert('Webpack is functioning');
+      </kbd>
+
+      <p class="lead mt-2">
+        Webpack will build our project into a directory named dist and call the file
+        main.js. Inside of our HTML we can add the script tag to refer to that file.
+      </p>
+
+      <kbd class="form-control" style="background-color: #0b161d; color: white;" > 
+          &lt;script src="./dist/main.js">&lt;/script>
+      </kbd>
+
     </div>
+
+    
 
     <div class="form-group container" >
       <h3>Super Simple JS Addition</h3>
@@ -55,7 +135,6 @@
           <input class="col-sm-2 mr-2" type="text" name="number1" id="number1">
           <input type="text" readonly class="form-control col-sm-1 text-center mr-2" value="+">
           <input class="col-sm-2 mr-2" type="text" name="number2" id="number2">
-          <input type="text" readonly class="form-control col-sm-1 text-center mr-2" value="=">
           <input type="submit" readonly class="btn btn-primary col-sm-2 mr-2" id="staticEmail" value="Get Answer">
         </div>
         <input class="col mt-3"type="text" name="answer" id="answer" >
@@ -71,5 +150,6 @@
 <script src="./src/script/libs/jQuery.js"></script>
 <script src="./src/script/libs/popper.min.js"></script>
 <script src="./src/script/libs/bootstrap.min.js"></script>
+<script src="./dist/main.js"></script>
 </body>
 </html>
