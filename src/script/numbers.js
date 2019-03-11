@@ -1,4 +1,4 @@
-function getnumbers() {
+const getnumbers = () => {
   // Use jQuery to get form input values
   number1 = $("#number1")
     .val()
@@ -19,7 +19,8 @@ function getnumbers() {
   }
 }
 
-function addnumbers() {
+
+const addnumbers = () => {
   // Run getnumbers to get inputs
   getnumbers();
   // Do addition

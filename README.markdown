@@ -2,6 +2,7 @@
 - Create project with your desired file structure
 - Import Bootstrap and dependencies
 - Create basic HTML webpage without Webpack
+- Optimize JavaScript imports/exports
 - Install and get default Webpack, Webpack-CLI working
 - Configure our JavaScript for Webpack
 - Add our own Webpack configuration settings
