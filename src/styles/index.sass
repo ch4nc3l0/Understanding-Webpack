@@ -1,1 +1,11 @@
 @import './bootstrap/bootstrap.scss'
+
+@include media-breakpoint-down(sm)
+    #navbar
+        display: none
+
+
+@include media-breakpoint-up(md)
+    #navbar
+        display: flex
+
