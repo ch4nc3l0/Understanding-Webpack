@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="stylesheet" href="./src/styles/index.css" />
     <title>Understanding Webpack</title>
   </head>
 
@@ -26,13 +25,14 @@
             role="button"
             aria-haspopup="true"
             aria-expanded="false"
-            >Dropdown</a
+            >Learn more webpack</a
           >
           <div class="dropdown-menu">
-            <a class="dropdown-item" href="#one">one</a>
-            <a class="dropdown-item" href="#two">two</a>
+            <a class="dropdown-item" href="#one">Loaders</a>
             <div role="separator" class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#three">three</a>
+            <a class="dropdown-item" href="#two">Plugins</a>
+            <div role="separator" class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#three">Cache Busting</a>
           </div>
         </li>
       </ul>
@@ -256,10 +256,12 @@
         readonly
         style="background-color: #0b161d; color: white;"
       >
-        output: {
-          path: path.resolve(__dirname, 'webpackoutput'),
-          filename: 'outputfile.js'
-        }
+      const path = require("path");
+
+      output: {
+        filename: "outputfile.js",
+        path: path.resolve(__dirname, "webpackoutput")
+      },
       </textarea>
 
       <p class="lead mt-2">
@@ -269,19 +271,21 @@
       </p>
 
       <b>Webpack.config.js</b>
-      <textarea
+      <textarea id="one"
         class="form-control"
         rows="9"
         readonly
         style="background-color: #0b161d; color: white;"
       >
+      const path = require("path");
+
       module.exports = {
         entry: './src/script/index.',
         mode: 'development',
         output: {
-          path: path.resolve(__dirname, 'webpackoutput'),
-          filename: 'outputfile.js'
-        }
+            filename: "outputfile.js",
+            path: path.resolve(__dirname, "webpackoutput")
+          },
       };
     </textarea
       >
@@ -294,13 +298,67 @@
     </div>
 
     <div class="container">
+
       <p class="lead">
         <a href="https://webpack.js.org/concepts/loaders">Loaders</a> are amazing they
-        are the reason that webpack is worth installing and configuring. With loaders
-        Webpack can understand more than just javascript.
-        
+        are the reason that webpack is can bundle so many different types of assets. With loaders
+        Webpack can understand more than just javascript. In this example I have been using a plugin
+        for vscode to compile the Sass files to css files, lets use a loader to do this for us. On
+        the terminal, using npm we have to install all the loaders we need.
       </p>
+
+      <kbd
+        class="form-control"
+        style="background-color: #0b161d; color: white;"
+      >
+      npm install sass-loader node-sass style-loader css-loader  --save-dev
+      </kbd>
+
+      <p class="lead mt-2">
+          We have to install three loaders because the scss/sass loader depends on the other
+          loaders. What is actually happening is our sass is being compiled to css using the 
+          sass-loader, then the css is compiled to javascript using the css-loader, and finally
+          the css is applied to the dom directly using style-loader. In webpack config a module
+          object has to be specified in order to use the loaders. Inside the module object there
+          is a rule object that we can use test: on to test for filetypes like .css, .sass, and
+          many more. After we specify what filetype to look for we have to tell webpack what we want
+          to do with them using use:
+        </p>
+
+      <b>Webpack.config.js</b>
+      <textarea
+        class="form-control"
+        rows="9"
+        readonly
+        style="background-color: #0b161d; color: white;"
+      >
+      const path = require("path");
+
+      module.exports = {
+          entry: './src/script/index.js',
+          mode: 'development',
+          output: {
+            filename: "outputfile.js",
+            path: path.resolve(__dirname, "webpackoutput")
+          },
+      
+          module: {
+            rules: [{ 
+              test: /\.sass$/,
+              use:[
+                "style-loader",
+                "css-loader",
+                "sass-loader"
+              ] 
+            }]
+          }
+        };
+    </textarea>
+
     </div>
+
+
+
 
     <div class="form-group container">
       <h3>Super Simple JS Addition</h3>
@@ -352,6 +410,7 @@
     ></script>
     <script src="./src/script/libs/bootstrap.min.js"></script>
 
-    <script src="./dist/main.js"></script>
+    <script src="./webpackoutput/js.js"></script>
+    <script src="./webpackoutput/sass.js"></script>
   </body>
 </html>
