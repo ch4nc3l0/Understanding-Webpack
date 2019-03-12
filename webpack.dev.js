@@ -1,8 +1,9 @@
 const path = require("path");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const webpack = require('webpack');
+const merge = require("webpack-merge");
+const common = require("./webpack.common");
 
-module.exports = {
+module.exports = merge(common,{
     entry: {
       appjs:'./src/script/index.js',
       bootjs:'./src/script/libs/bootstrap.bundle.min.js',
@@ -10,17 +11,13 @@ module.exports = {
     },
     mode: 'development',
     output: {
-      filename: "[name].[contentHash].js",
-      path: path.resolve(__dirname, "webpackoutput")
+      filename: "[name].js",
+      path: path.resolve(__dirname, "webpackdev")
     },
     plugins:[
       new HtmlWebpackPlugin({
         template: './index.html'
       }),
-      new webpack.ProvidePlugin({
-        $: "jquery",
-        jQuery: "jquery"
-       }),
     ],
     module: {
       rules: [{ 
@@ -32,4 +29,4 @@ module.exports = {
         ] 
       }]
     }
-  };
+  });
