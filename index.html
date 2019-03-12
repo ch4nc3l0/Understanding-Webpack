@@ -1,260 +1,357 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="./src/styles/index.css" />
+    <title>Understanding Webpack</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="./src/styles/index.css">
-  <title>Understanding Webpack</title>
-</head>
+  <body data-spy="scroll" data-target="#navbar" data-offset="0">
+    <nav id="navbar" class="navbar navbar-light bg-light sticky-top">
+      <a class=" navbar-brand" href="#">Chance@unjolt.com</a>
+      <ul class="nav nav-pills">
+        <li class="nav-item">
+          <a class="nav-link" href="#whyusewebpack">Why Use Webpack</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#basicconfig">Basic Config</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            data-toggle="dropdown"
+            href="#"
+            role="button"
+            aria-haspopup="true"
+            aria-expanded="false"
+            >Dropdown</a
+          >
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="#one">one</a>
+            <a class="dropdown-item" href="#two">two</a>
+            <div role="separator" class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#three">three</a>
+          </div>
+        </li>
+      </ul>
+    </nav>
 
-<body data-spy="scroll" data-target="#navbar" data-offset="0">
+    <div class="jumbotron bg-primary">
+      <h1 class="display-4 text-center text-white">Understanding Webpack</h1>
+      <p class="lead text-center text-white" id="whyusewebpack">
+        A simple writeup of my journey learning Webpack! 🚀
+      </p>
+    </div>
 
-  <nav id="navbar" class="navbar navbar-light bg-light sticky-top" >
-    <a class=" navbar-brand" href="#">Chance@unjolt.com</a>
-    <ul class="nav nav-pills">
-      <li class="nav-item">
-        <a class="nav-link"  href="#whyusewebpack">@Why Use Webpack</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#basicconfig">@Basic Config</a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
-          aria-expanded="false">Dropdown</a>
-        <div class="dropdown-menu">
-          <a class="dropdown-item" href="#one">one</a>
-          <a class="dropdown-item" href="#two">two</a>
-          <div role="separator" class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#three">three</a>
+    <div class="container">
+      <h2>
+        Why Use Webpack?
+      </h2>
+    </div>
+
+    <div class="container">
+      <p class="lead">
+        Webpack automates alot of the headaches of web development. It can
+        bundle assets, minify files, compile scss, serve a development
+        live-reload web server, compress images, add hashes and much more
+      </p>
+    </div>
+
+    <div class="container mt-4">
+      <h3>
+        Basic Webpack Installation
+      </h3>
+    </div>
+
+    <div class="container">
+      <p class="lead">
+        Before installing Webpack, we need to make our package.json file with
+        npm. <a href="https://nodejs.org/en/">Node</a> does have to be installed
+        in order to use npm. The -y flag can be used to create the file using
+        the defaults. It's like saying yes, just create my file.
+      </p>
+
+      <kbd
+        class="form-control"
+        style="background-color: #0b161d; color: white;"
+      >
+        npm init -y
+      </kbd>
+
+      <p class="mt-2 lead">
+        The new file named package.json should look something like this:
+      </p>
+      <b>package.json</b>
+      <textarea
+        class="form-control"
+        rows="5"
+        readonly
+        style="background-color: #0b161d; color: white;"
+      >
+        {
+          "name": "understanding-webpack",
+          "version": "1.0.0",
+          "description": "Understanding Webpack",
+          "main": "index.js",
+          "scripts": {
+          },
+          "repository": {
+            "type": "git",
+            "url": "git+https://github.com/ch4nc3l0/Understanding-Webpack.git"
+          },
+          "keywords": [],
+          "author": "",
+          "license": "ISC",
+          "bugs": {
+            "url": "https://github.com/ch4nc3l0/Understanding-Webpack/issues"
+          },
+          "homepage": "https://github.com/ch4nc3l0/Understanding-Webpack#readme"
+          }        
+      </textarea>
+
+      <p class="lead mt-2">
+        Installation is made easy with npm, we can install Webpack in basically
+        any project with a terminal command:
+      </p>
+
+      <kbd
+        class="form-control"
+        style="background-color: #0b161d; color: white;"
+      >
+        npm install --save-dev webpack webpack-cli
+      </kbd>
+
+      <p class="lead mt-2">
+        After npm is done installing webpack we can look in the package.json
+        file and now it includes the webpack dependencies we need. Just because
+        Webpack is installed doesn't mean it knows what we want it to do, we
+        have to set a couple of configurations up before it will start. The
+        first of them is adding the start script to "scripts" in package.json:
+      </p>
+      <b>package.json</b>
+      <textarea
+        class="form-control"
+        rows="4"
+        readonly
+        style="background-color: #0b161d; color: white;"
+      >
+        "scripts": {
+            "start": "webpack"
+          },
+    </textarea
+      >
+
+      <p class="lead mt-2">
+        The next thing we need to do to make the default config work is add a
+        directory named src and call the file index.js. For now, we can just add
+        an alert inside the file to check if webpack really did build correctly.
+      </p>
+
+      <b>index.js</b>
+      <kbd
+        class="form-control"
+        style="background-color: #0b161d; color: white;"
+      >
+        alert('Webpack is functioning');
+      </kbd>
+
+      <p class="lead mt-2">
+        Webpack will build our project into a directory named dist and call the
+        file main.js. Inside of our HTML we can add the script tag to refer to
+        that file.
+      </p>
+
+      <b>index.html</b>
+      <kbd
+        class="form-control"
+        style="background-color: #0b161d; color: white;"
+      >
+        &lt;script src="./dist/main.js">&lt;/script>
+      </kbd>
+
+      <p id="basicconfig" class="lead mt-2">
+        Congratulations! Webpack is now installed & working in a very basic
+        form! Now we can configure it to get more features.
+      </p>
+    </div>
+
+    <div class="container mt-4">
+      <h2>
+        Basic Configuration
+      </h2>
+    </div>
+
+    <div class="container">
+      <p class="lead">
+        Before adding a dev, and production config for webpack, we will just
+        make a config file that pretty much does the same thing webpack does by
+        default, and then build on top of that. We will make a file called
+        webpack.config.js, you can call it whatever you would like to but
+        remember the name. I will always refer to the filename as
+        webpack.config.js.
+      </p>
+
+      <p class="lead">
+        Inside of webpack.config.js we have to use some foreign-looking syntax.
+        We have to first export a module and then define our configurations.
+        Here I just defined the entry point (the file webpack will use to build
+        our javascript) as the same file webpack automatically looks for by
+        default.
+      </p>
+
+      <b>Webpack.config.js</b>
+      <textarea
+        class="form-control"
+        rows="4"
+        readonly
+        style="background-color: #0b161d; color: white;"
+      >
+        module.exports = {
+          entry: './src/index.js'
+        };
+    </textarea
+      >
+
+      <p class="lead mt-2">
+        If you would like to customized the entry point all we have to do is
+        change the path:
+      </p>
+
+      <b>Webpack.config.js</b>
+      <kbd
+        class="form-control"
+        style="background-color: #0b161d; color: white;"
+      >
+        entry: './src/script/index.js'
+      </kbd>
+
+      <p class="lead mt-2">
+        Now if we build using npm start.... we get an error because we moved the
+        default file without actually telling webpack to use our config with the
+        correct entry point path. Inside of package.json we have to change the
+        start line a little:
+      </p>
+
+      <b>package.json</b>
+      <kbd
+        class="form-control"
+        style="background-color: #0b161d; color: white;"
+      >
+        "start":"webpack --config webpack.config.js"
+      </kbd>
+
+      <p class="lead mt-2">
+        Ok thats the first config option, lets add some more, we can change the
+        output file with the output object. We need to specify the path so we
+        require that from npm. path.resolve is just a fancy way of locating the
+        folder on your computer. filename is the name of the output file.
+      </p>
+
+      <b>Webpack.config.js</b>
+      <textarea
+        class="form-control"
+        rows="5"
+        readonly
+        style="background-color: #0b161d; color: white;"
+      >
+        output: {
+          path: path.resolve(__dirname, 'webpackoutput'),
+          filename: 'outputfile.js'
+        }
+      </textarea>
+
+      <p class="lead mt-2">
+        The last basic configuration option is the mode. Mode can be set to
+        either production, or development. Development mode will stop minifying
+        your code so that way it is easier to debug.
+      </p>
+
+      <b>Webpack.config.js</b>
+      <textarea
+        class="form-control"
+        rows="9"
+        readonly
+        style="background-color: #0b161d; color: white;"
+      >
+      module.exports = {
+        entry: './src/script/index.',
+        mode: 'development',
+        output: {
+          path: path.resolve(__dirname, 'webpackoutput'),
+          filename: 'outputfile.js'
+        }
+      };
+    </textarea
+      >
+    </div>
+
+    <div class="container mt-4">
+      <h3>
+        Using loaders
+      </h3>
+    </div>
+
+    <div class="container">
+      <p class="lead">
+        <a href="https://webpack.js.org/concepts/loaders">Loaders</a> are amazing they
+        are the reason that webpack is worth installing and configuring. With loaders
+        Webpack can understand more than just javascript.
+        
+      </p>
+    </div>
+
+    <div class="form-group container">
+      <h3>Super Simple JS Addition</h3>
+      <form class="form" onsubmit="event.preventDefault()">
+        <div class="container">
+          <div class="row">
+            <input
+              class="col-sm-2 mr-2"
+              type="text"
+              name="number1"
+              id="number1"
+            />
+            <input
+              type="text"
+              readonly
+              class="form-control col-sm-1 text-center mr-2"
+              value="+"
+            />
+            <input
+              class="col-sm-2 mr-2"
+              type="text"
+              name="number2"
+              id="number2"
+            />
+            <input
+              id="addanswer"
+              readonly
+              class="btn btn-primary col-sm-2 mr-2"
+              value="Get Answer"
+            />
+          </div>
+          <input class="col mt-3" type="text" name="answer" id="answer" />
+          <p
+            class="alert alert-danger mt-2"
+            id="additionerror"
+            style="display:none"
+          >
+            Error check the inputs.
+          </p>
         </div>
-      </li>
-    </ul>
-  </nav>
+      </form>
+    </div>
 
+    <script src="./src/script/libs/jQuery.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script src="./src/script/libs/bootstrap.min.js"></script>
 
-  <div class="jumbotron bg-primary">
-    <h1 class="display-4 text-center text-white">Understanding Webpack</h1>
-    <p class="lead text-center text-white" id="whyusewebpack">
-      A simple writeup of my journey learning Webpack! 🚀
-    </p>
-  </div>
-
-  <div  class="container">
-    <h2>
-      Why Use Webpack?
-    </h2>
-  </div>
-
-  <div class="container">
-    <p class="lead">
-      Webpack automates alot of the headaches of web development. It can bundle
-      assets, minify files, compile scss, serve a development live-reload web
-      server, compress images, add hashes and much more
-    </p>
-  </div>
-
-  <div class="container mt-4">
-    <h3>
-      Basic Webpack Installation
-    </h3>
-  </div>
-
-  <div class="container">
-    <p class="lead">
-      Before installing Webpack, we need to make our package.json file with
-      npm. <a href="https://nodejs.org/en/">Node</a> does have to be installed
-      in order to use npm. The -y flag can be used to create the file using
-      the defaults. It's like saying yes, just create my file.
-    </p>
-
-    <kbd class="form-control" style="background-color: #0b161d; color: white;">
-      npm init -y
-    </kbd>
-
-    <p class="mt-2 lead">
-      The new file named package.json should look something like this:
-    </p>
-    <b>package.json</b>
-    <textarea class="form-control" rows="5" readonly style="background-color: #0b161d; color: white;">
-                  {
-                    "name": "understanding-webpack",
-                    "version": "1.0.0",
-                    "description": "Understanding Webpack",
-                    "main": "index.js",
-                    "scripts": {
-                    },
-                    "repository": {
-                      "type": "git",
-                      "url": "git+https://github.com/ch4nc3l0/Understanding-Webpack.git"
-                    },
-                    "keywords": [],
-                    "author": "",
-                    "license": "ISC",
-                    "bugs": {
-                      "url": "https://github.com/ch4nc3l0/Understanding-Webpack/issues"
-                    },
-                    "homepage": "https://github.com/ch4nc3l0/Understanding-Webpack#readme"
-                  }        
-                </textarea>
-
-    <p class="lead mt-2">
-      Installation is made easy with npm, we can install Webpack in basically
-      any project with a terminal command:
-    </p>
-
-    <kbd class="form-control" style="background-color: #0b161d; color: white;">
-      npm install --save-dev webpack webpack-cli
-    </kbd>
-
-    <p class="lead mt-2">
-      After npm is done installing webpack we can look in the package.json
-      file and now it includes the webpack dependencies we need. Just because
-      Webpack is installed doesn't mean it knows what we want it to do, we have
-      to set a couple of configurations up before it will start. The first of them
-      is adding the start script to "scripts" in package.json:
-    </p>
-    <b>package.json</b>
-    <textarea class="form-control" rows="4" readonly style="background-color: #0b161d; color: white;">
-                    "scripts": {
-                      "start": "webpack"
-                    },
-                </textarea>
-
-    <p class="lead mt-2">
-      The next thing we need to do to make the default config work is
-      add a directory named src and call the file index.js. For now, we can just add
-      an alert inside the file to check if webpack really did build
-      correctly.
-    </p>
-
-    <b>index.js</b>
-    <kbd class="form-control" style="background-color: #0b161d; color: white;">
-      alert('Webpack is functioning');
-    </kbd>
-
-    <p class="lead mt-2">
-      Webpack will build our project into a directory named dist and call the file
-      main.js. Inside of our HTML we can add the script tag to refer to that file.
-    </p>
-
-    <b>index.html</b>
-    <kbd class="form-control" style="background-color: #0b161d; color: white;">
-      &lt;script src="./dist/main.js">&lt;/script>
-    </kbd>
-
-    <p id="basicconfig" class="lead mt-2">
-      Congratulations! Webpack is now installed & working in a very basic form! Now
-      we can configure it to get more features.
-    </p>
-  </div>
-
-  <div class="container mt-4">
-    <h2>
-      Basic Configuration
-    </h2>
-  </div>
-
-  <div class="container">
-    <p class="lead">
-      Before adding a dev, and production config for webpack, we will
-      just make a config file that pretty much does the same thing webpack does by default,
-      and then build on top of that. We will make a file called webpack.config.js, you can call it whatever you would
-      like
-      to but remember the name. I will always refer to the filename as webpack.config.js.
-    </p>
-
-    <p class="lead">
-      Inside of webpack.config.js we have to use some foreign-looking syntax. We have to
-      first export a module and then define our configurations. Here I just defined the
-      entry point (the file webpack will use to build our javascript) as the same file
-      webpack automatically looks for by default.
-    </p>
-
-    <b>Webpack.config.js</b>
-    <textarea class="form-control" rows="4" readonly style="background-color: #0b161d; color: white;">
-                  module.exports = {
-                    entry: './src/index.js'
-                  };
-                </textarea>
-
-    <p class="lead mt-2">
-      If you would like to customized the entry point all we have to do is change the
-      path:
-    </p>
-
-    <b>Webpack.config.js</b>
-    <kbd class="form-control" style="background-color: #0b161d; color: white;">
-      entry: './src/script/index.js'
-    </kbd>
-
-    <p class="lead mt-2">
-      Now if we build using npm start.... we get an error because we moved the default
-      file without actually telling webpack to use our config with the correct entry point
-      path. Inside of package.json we have to change the start line a little:
-    </p>
-
-    <b>package.json</b>
-    <kbd class="form-control" style="background-color: #0b161d; color: white;">
-      "start":"webpack --config webpack.config.js"
-    </kbd>
-
-    <p class="lead mt-2">
-      Ok thats the first config option, lets add some more, we can change the output
-      file with the output object. We need to specify the path so we require that from
-      npm. path.resolve is just a fancy way of locating the folder on your computer.
-      filename is the name of the output file.
-    </p>
-
-    <b>Webpack.config.js</b>
-    <textarea class="form-control" rows="10" readonly style="background-color: #0b161d; color: white;">
-                  const path = require('path');
-          
-                  module.exports = {
-                    entry: './src/script/index.js',
-                    output: {
-                      path: path.resolve(__dirname, 'yourfolder'),
-                      filename: 'youroutputfile.js'
-                    }
-                  };
-                </textarea>
-
-    <p class="lead mt-2">
-      Ok thats the first config option, lets add some more, we can change the output
-      file with the output object. We need to specify the path so we require that from
-      npm. path.resolve is just a fancy way of locating the folder on your computer.
-      filename is the name of the output file.
-    </p>
-
-  </div>
-
-
-  <div class="form-group container">
-    <h3>Super Simple JS Addition</h3>
-    <form class="form" onsubmit="event.preventDefault()">
-      <div class="container">
-        <div class="row">
-          <input class="col-sm-2 mr-2" type="text" name="number1" id="number1">
-          <input type="text" readonly class="form-control col-sm-1 text-center mr-2" value="+">
-          <input class="col-sm-2 mr-2" type="text" name="number2" id="number2">
-          <input id="addanswer" readonly class="btn btn-primary col-sm-2 mr-2" value="Get Answer">
-        </div>
-        <input class="col mt-3" type="text" name="answer" id="answer">
-        <p class="alert alert-danger mt-2" id="additionerror" style="display:none">
-          Error check the inputs.
-        </p>
-      </div>
-    </form>
-  </div>
-
-
-
-  <script src="./src/script/libs/jQuery.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-  <script src="./src/script/libs/bootstrap.min.js"></script>
-
-  <script src="./dist/main.js"></script>
-</body>
-
+    <script src="./dist/main.js"></script>
+  </body>
 </html>
