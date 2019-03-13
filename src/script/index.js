@@ -1,4 +1,5 @@
 import { checknumbers } from './numbers'
+import '../styles/index.sass'
 
 $(document).ready(function () {
 

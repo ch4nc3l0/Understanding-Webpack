@@ -1,10 +1,10 @@
 const webpack = require('webpack');
+var HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
     entry: {
       appjs:'./src/script/index.js',
-      bootjs:'./src/script/libs/bootstrap.bundle.min.js',
-      sass:'./src/styles/index.sass'
+      vendorjs:'./src/script/vendor.js',
     },
     plugins:[
       new webpack.ProvidePlugin({
