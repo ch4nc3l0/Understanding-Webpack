@@ -33,6 +33,8 @@
             <a class="dropdown-item" href="#two">Cache Busing</a>
             <div role="separator" class="dropdown-divider"></div>
             <a class="dropdown-item" href="#three">Plugins</a>
+            <div role="separator" class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#four">Splitting Files</a>
           </div>
         </li>
       </ul>
@@ -452,9 +454,184 @@
           }
         };
     </textarea>
-
     </div>
 
+    <div class="container mt-4" id="four">
+      <h3>
+        Splitting config files
+      </h3>
+    </div>
+
+    <div class="container">
+
+      <p class="lead">
+        Webpack can have many config files to change settings between development
+        and production. For example we might want our files minified in production, but
+        in development we don't want them minified because it is harder to debug.
+      </p>
+
+      <p class="lead mt-2">
+        We will make three different files. They can be called whatever you like, it
+        is practice to call them common, dev, and prod. Common will contain settings
+        that both dev and prod will share.
+      </p>
+
+      <b>Webpack.common.js</b>
+      <textarea 
+        class="form-control"
+        rows="9"
+        readonly
+        style="background-color: #0b161d; color: white;"
+      >
+      const webpack = require('webpack');
+      var HtmlWebpackPlugin = require("html-webpack-plugin");
+      
+      module.exports = {
+          entry: {
+            appjs:'./src/script/index.js',
+            vendorjs:'./src/script/vendor.js',
+          },
+          plugins:[
+            new webpack.ProvidePlugin({
+              $: "jquery",
+              jQuery: "jquery"
+             })
+          ],
+          module: {
+            rules: [
+              {
+                test: /\.html$/,
+                use: ["html-loader"]
+              },
+              {
+                test: /\.(svg|png|jpg|gif)$/,
+                use: {
+                  loader: "file-loader",
+                  options: {
+                    name: "[name].[hash].[ext]",
+                    outputPath: "imgs"
+                  }
+                }
+              }
+            ]
+          }
+        };
+    </textarea>
+
+    <b>Webpack.dev.js</b>
+      <textarea 
+        class="form-control"
+        rows="9"
+        readonly
+        style="background-color: #0b161d; color: white;"
+      >
+const path = require("path");
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const merge = require("webpack-merge");
+const common = require("./webpack.common");
+
+module.exports = merge(common,{
+    entry: {
+      appjs:'./src/script/index.js',
+      bootjs:'./src/script/libs/bootstrap.bundle.min.js',
+      sass:'./src/styles/index.sass'
+    },
+    mode: 'development',
+    output: {
+      filename: "[name].js",
+      path: path.resolve(__dirname, "webpackdev")
+    },
+    plugins:[
+      new HtmlWebpackPlugin({
+        template: './index.html'
+      }),
+    ],
+    module: {
+      rules: [{ 
+        test: /\.sass$/,
+        use:[
+          "style-loader",
+          "css-loader",
+          "sass-loader"
+        ] 
+      }]
+    }
+  });
+    </textarea>
+
+    <b>Webpack.prod.js</b>
+    <textarea 
+      class="form-control"
+      rows="9"
+      readonly
+      style="background-color: #0b161d; color: white;"
+    >
+    const path = require("path");
+    const HtmlWebpackPlugin = require('html-webpack-plugin');
+    const TerserPlugin = require("terser-webpack-plugin");
+    const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+    const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+    const CleanWebpackPlugin = require('clean-webpack-plugin');
+    const common = require("./webpack.common");
+    const merge = require("webpack-merge");
+    
+    module.exports = merge(common,{
+        mode: 'production',
+        output: {
+          filename: "[name].[contentHash].js",
+          path: path.resolve(__dirname, "webpackoutput")
+        },
+        optimization: {
+          minimizer:[
+            new OptimizeCssAssetsPlugin(),
+            new TerserPlugin(),
+            new HtmlWebpackPlugin({
+              template: "./index.html",
+              minify: {
+                removeAttributeQuotes: true,
+                collapseWhitespace: true,
+                removeComments: true
+              }
+            })  
+          ]
+        },
+        plugins: [
+            new MiniCssExtractPlugin({ filename: "[name].[contentHash].css" }),
+            new CleanWebpackPlugin()
+          ],
+        module: {
+          rules: [
+            {
+              test: /\.sass$/,
+              use: [
+                MiniCssExtractPlugin.loader,
+                "css-loader",
+                "sass-loader"
+              ]
+            }
+          ]
+        }
+      });
+  </textarea>
+    </div>
+
+    <div class="container mt-4">
+      <h3>
+        Wrapping up
+      </h3>
+    </div>
+
+    <div class="container">
+
+      <img src="./src/images/webpack.svg" alt="">
+
+      <p class="lead">
+        Webpack is a great tool that automates alot of the more tedious
+        tasks that modern web developmers need to do. It takes some time
+        to set-up, however once it is set up it is a great resource. Feel
+        free to fork this website on <a href="https://github.com/ch4nc3l0/Understanding-Webpack">github</a>
+        as a starter template for any project you would like.
+      </p>
 
 
     <div class="form-group container">
